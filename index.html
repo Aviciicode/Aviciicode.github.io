@@ -131,11 +131,11 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Java注解<br>##一.概念<br>##二.JDk内置注解<br>##三.自定义注解<br>###1.格式(元注解)：<br>        public @inteface 注解名称 {}<br>###2.本质：<br>注解本质上就是一个接口，该接口默认继承 Annotation接口</p>
+        <p>Java注解<br>##一.概念<br>##二.JDk内置注解<br>##三.自定义注解<br>1.格式(元注解)：<br>        public @inteface 注解名称 {}<br>###2.本质：<br>注解本质上就是一个接口，该接口默认继承 Annotation接口</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public interface MyAnno extends java.lang.annotation.Annotation &#123;&#125;</span><br></pre></td></tr></table></figure>
 <p>###3.属性定义</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public void <span class="function"><span class="title">addTest</span></span>() &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;addTest...&quot;</span>);</span><br><span class="line">        Assert.assertEquals(4, new Calculator().add(1, 2));</span><br><span class="line">        System.out.println(<span class="string">&quot;fail...&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>###4.元注解</p>
+<p>###4.元注解<br><img src = "images/testPicture.jpg" alt = "test"><br><img src="https://w.wallhaven.cc/full/g8/wallhaven-g88ro7.jpg" alt="网络图片"><br><img src="https://w.wallhaven.cc/full/g8/wallhaven-g88ro7.jpg" alt="test"></p>
 
       
     </div>
