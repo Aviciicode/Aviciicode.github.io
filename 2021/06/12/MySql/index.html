@@ -1,0 +1,794 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MySql概念基础及操作指令 | Piano Code</title><meta name="author" content="RaverHeart"><meta name="copyright" content="RaverHeart"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JavaWeb开发 简单理解为使用 Java 语言开发网站 需要掌握的内容 数据库知识 网页前端的制作 Web核心技术   实际项目  一. 数据库的基本概念 英文名称：DataBase（DB） 用于存储和管理数据的仓库 数据库的特点 持久化存储数据，数据库就是一个文件系统 方便的存储和管理 使用统一的方式来操作数据库 — SQL   常见的数据库软件  二. MySql数据库软件 mysql的启">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql概念基础及操作指令">
+<meta property="og:url" content="http://example.com/2021/06/12/MySql/index.html">
+<meta property="og:site_name" content="Piano Code">
+<meta property="og:description" content="JavaWeb开发 简单理解为使用 Java 语言开发网站 需要掌握的内容 数据库知识 网页前端的制作 Web核心技术   实际项目  一. 数据库的基本概念 英文名称：DataBase（DB） 用于存储和管理数据的仓库 数据库的特点 持久化存储数据，数据库就是一个文件系统 方便的存储和管理 使用统一的方式来操作数据库 — SQL   常见的数据库软件  二. MySql数据库软件 mysql的启">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-06-12T04:18:01.000Z">
+<meta property="article:modified_time" content="2021-08-05T10:25:10.000Z">
+<meta property="article:author" content="RaverHeart">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/06/12/MySql/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MySql概念基础及操作指令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-05 18:25:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1617328720326__01.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a></div></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Piano Code</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MySql概念基础及操作指令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-06-12T04:18:01.000Z" title="Created 2021-06-12 12:18:01">2021-06-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-08-05T10:25:10.000Z" title="Updated 2021-08-05 18:25:10">2021-08-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySql概念基础及操作指令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="JavaWeb开发"><a href="#JavaWeb开发" class="headerlink" title="JavaWeb开发"></a>JavaWeb开发</h3><ol>
+<li>简单理解为使用 Java 语言开发网站</li>
+<li>需要掌握的内容<ol>
+<li>数据库知识</li>
+<li>网页前端的制作</li>
+<li>Web核心技术</li>
+</ol>
+</li>
+<li>实际项目</li>
+</ol>
+<h4 id="一-数据库的基本概念"><a href="#一-数据库的基本概念" class="headerlink" title="一. 数据库的基本概念"></a>一. 数据库的基本概念</h4><ol>
+<li>英文名称：DataBase（DB）</li>
+<li>用于存储和管理数据的仓库</li>
+<li>数据库的特点<ol>
+<li>持久化存储数据，数据库就是一个文件系统</li>
+<li>方便的存储和管理</li>
+<li>使用统一的方式来操作数据库 — SQL</li>
+</ol>
+</li>
+<li>常见的数据库软件</li>
+</ol>
+<h4 id="二-MySql数据库软件"><a href="#二-MySql数据库软件" class="headerlink" title="二. MySql数据库软件"></a>二. MySql数据库软件</h4><ol>
+<li><p>mysql的启动</p>
+<ol>
+<li>使用管理员权限打开cmd<ul>
+<li>net start MySQL80，开启服务</li>
+<li>net stop MySQL80，关闭服务</li>
+</ul>
+</li>
+<li>cmd –&gt; services.msc 打开服务的窗口</li>
+</ol>
+</li>
+<li><p>Mysql登录，用户名密码为mysql服务对应的账户密码</p>
+<ol>
+<li>mysql -uroot -proot，连接本地的Mysql</li>
+<li>mysql -h127.0.0.1(ip) -uroot -proot，连接对应地址主机上的Mysql</li>
+<li>mysql –host = 127.0.0.1(ip)  –user = root –password = root</li>
+</ol>
+</li>
+<li><p>退出</p>
+<ol>
+<li>exit</li>
+<li>quit</li>
+</ol>
+</li>
+<li><p>MySql的结构图示</p>
+<img src = "/images/MySQL数据库、表、数据的关系.bmp"></li>
+<li><p>MySql的目录结构</p>
+<ol>
+<li>MySql安装目录<ul>
+<li>配置文件 my.ini</li>
+</ul>
+</li>
+<li>MySql数据目录<ul>
+<li>数据库：文件夹</li>
+<li>表：文件</li>
+<li>数据：数据</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="三-SQL"><a href="#三-SQL" class="headerlink" title="三. SQL"></a>三. SQL</h4><ol>
+<li><p>什么是SQL：Structured Query Language(结构化查询语言)，其实就是定义了操作所有关系型数据库的规则</p>
+</li>
+<li><p>SQL通用的语法</p>
+<ol>
+<li>SQL语句可以单行或者多行书写，以封号结尾</li>
+<li>可以使用空格和TAB缩进增强语句的可读性。</li>
+<li>MySQL的数据库SQL语句不区分大小写，关键字建议使用大写。</li>
+<li>3种注释<ul>
+<li>单行注释：– 注释内容  或者 # 注释内容（mysql特有）;（–后必须加空格，#后不用加空格）</li>
+<li>多行注释：<code>/*注释*/</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>SQL语句的分类</p>
+<ol>
+<li>DDL(Definition)：数据定义语言，用来定义数据库对象：数据库，表，列等。关键字：create，drop，alter等。</li>
+<li>DCL(Control)：数据控制语言，用来定义数据库的访问权限和安全级别，及创建用户。关键字：GRANT, REVOKE等。</li>
+<li>DML：增删改表中的数据。关键字：insert, delete, update等。</li>
+<li>DQL：查询表中的数据。关键字：select, where等。</li>
+</ol>
+<img src = "/images/SQL分类.bmp"></li>
+</ol>
+<h4 id="四-DDL（Data-Definition-Language）"><a href="#四-DDL（Data-Definition-Language）" class="headerlink" title="四. DDL（Data Definition Language）"></a>四. DDL（Data Definition Language）</h4><ol>
+<li><p><strong>操作数据库</strong>：CRUD</p>
+<ol>
+<li>C(Create)：创建<ul>
+<li>create database  数据库名称</li>
+<li>create database  if not exists 数据库名称，//如果不存在该数据库再创建</li>
+<li>create database  数据库名称  character set GBK，//以指定的字符集创建数据库</li>
+<li>create database  if not exists 数据库名称 character set GBK</li>
+</ul>
+</li>
+<li>R(Retrieve)：查询<ul>
+<li>查询所有数据库的名称：show databases;</li>
+<li>查询某个数据库的字符集和创建语句：show create database  数据库名称;</li>
+</ul>
+</li>
+<li>U(Update)：修改<ul>
+<li>alter database 数据库名称 character set 字符集名称   //修改数据库的字符集</li>
+</ul>
+</li>
+<li>D(Delete)：删除<ul>
+<li>drop database 数据库名称    //删除数据库</li>
+<li>drop database  if  exists   数据库名称，//如果该数据库存在再删除</li>
+</ul>
+</li>
+<li>使用数据库<ul>
+<li>select database()    //查询当前正在使用的数据库</li>
+<li>use 数据库名称    //进入该数据库文件夹</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>操作表</strong></p>
+<ol>
+<li><p>C(Create)：创建</p>
+<ul>
+<li><p>语法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名1 数据类型1，</span><br><span class="line">    列名2 数据类型2，</span><br><span class="line">    ...</span><br><span class="line">    列名n 数据类型n</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">create table 表2 like 表1  -- 新创建一个表2和已存在的表1数据结构相同</span><br><span class="line"></span><br><span class="line">-- eg.</span><br><span class="line">create table student(</span><br><span class="line">    id int, </span><br><span class="line">    name varchar(32), </span><br><span class="line">    age int, </span><br><span class="line">    score double(4, 1), </span><br><span class="line">    birthday date, </span><br><span class="line">    insert_time timestamp</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+<li><p>mysql中常用的数据类型：</p>
+<ol>
+<li>int，整数类型  //eg. age int，</li>
+<li>double，小数类型    // score double(5, 2)，小数最多5位，保留后两位</li>
+<li>日期类型<ul>
+<li>date，只包含年月日，格式为 yyyy-MM-dd</li>
+<li>datetime, 包涵年月日时分秒， 格式为 yyyy-MM-dd HH:mm:ss</li>
+<li>timestamp, 时间戳类型，包涵年月日时分秒， 格式为 yyyy-MM-dd HH:mm:ss，如果将来不给这个字段赋值，或赋值为NULL，则默认使用当前系统时间值</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-- 上面的代码直接设置 insert_time为 timestamp类型不会自动更新，通过下面的语句修改insert_time的数据类型可以在创建修改数据时自动更新时间</span><br><span class="line">-- 含义为：insert_time字段可以为空，默认时间为current_timestamp, on update curret_timestamp设置可以使记录发生改变的时候时间自动改变。</span><br><span class="line">ALTER TABLE stu MODIFY insert_time TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li>varchar，字符串类型  //eg. name varchar(20)   最大长度20个字符</li>
+</ol>
+<img src = "/images/IBV.png"></li>
+</ul>
+</li>
+<li><p>R(Retrieve)：查询</p>
+<ul>
+<li>show tables；   //查询某个数据库中所有表的名称</li>
+<li>desc 表名；//查询表结构</li>
+</ul>
+</li>
+<li><p>U(Update)：修改</p>
+<ul>
+<li>alter table 表名 rename to 新的表名        //修改表名        </li>
+<li>alter table 表名 character set utf8          //修改表的字符集 ；show create table 表名（查看表的字符集）</li>
+<li>alter table 表名 add 列名 数据类型；              //添加一列</li>
+<li> alter table 表名 drop 列名           //删除列</li>
+<li>alter table 表名 change 旧列名 新列名 新数据类型    //修改列名称，类型；</li>
+<li>alter table 表名 modify 列名 新数据类型    //修改列名的数据类型；</li>
+</ul>
+</li>
+<li><p>D(Delete)：删除</p>
+<ul>
+<li>drop table 表名    //删除表</li>
+<li>drop table if exists 表名    //如果存在该表，则删除</li>
+<li>truncate table 表名     //删除表，然后再创建一个同样格式的空表</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="五-DML：增删改表中的数据"><a href="#五-DML：增删改表中的数据" class="headerlink" title="五. DML：增删改表中的数据"></a>五. DML：增删改表中的数据</h4><ol>
+<li><strong>添加数据</strong>：insert into 表名(列名1， 列名2， …，列名n)  values(值1，值2，…，值n)；<ul>
+<li>注意事项：<ol>
+<li>列名和值要一一对应</li>
+<li>如果表名后，不定义列名，则默认给所有列添加值</li>
+<li>除了数字类型，其他类型都需要使用引号（单双都可以）包裹起来</li>
+<li>如果某一项为主键<code>primary key</code>，对应的添加数据设置为null即可。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO stu(id, NAME, age) VALUES(3, &#x27;小风&#x27;, 15);</span><br><span class="line">DESC stu;</span><br><span class="line">SELECT * FROM stu;</span><br><span class="line">ALTER TABLE stu CHANGE intime insert_time TIMESTAMP;</span><br><span class="line">INSERT INTO stu VALUES(6, &#x27;赵明&#x27;, 17, 80.345, NULL, NULL);</span><br><span class="line">INSERT INTO stu VALUES(7, &#x27;赵刚&#x27;, 17, 80.345, &#x27;1995-11-22&#x27;, NULL);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>删除数据</strong>：delete from 表名 [where 条件]<ul>
+<li>注意事项：不写条件，删除表中所有数据，有多少条数据，语句就会执行多少次</li>
+</ul>
+</li>
+<li><strong>修改数据</strong>：update 表名 set 列名1 = 值1，列名2 = 值2，…，列名n = 值n [where 条件]<ul>
+<li>注意事项：如果不写条件，会将表中所有的数据修改</li>
+</ul>
+</li>
+</ol>
+<h4 id="六-DQL：查询"><a href="#六-DQL：查询" class="headerlink" title="六. DQL：查询"></a>六. DQL：查询</h4><ol>
+<li>语法：select 字段列表 from 表名列表 where 条件列表 group by 分组字段 having 分组之后的条件 order by 排序 limit 分页限定 </li>
+<li>基础查询：<ol>
+<li>多个字段的查询<ol>
+<li>去除重复：select distinct  字段名1，字段名2，… from 表名；</li>
+<li>select 字段名1，字段名2，… from 表名； select * from 表名，查询所有字段</li>
+</ol>
+</li>
+<li>计算列：select 字段名1, 字段名2, 字段名3, ifnull(字段名2, 0) + IFNULL(字段名3, 0) from tes;<ol>
+<li>一般使用四则运算计算列的数值</li>
+<li>ifnull(字段名2, exp2)   如果改字段的某一行值为null时，将值替换为exp2的值，null参与的运算结果都为null</li>
+</ol>
+</li>
+<li>别名<ol>
+<li>as</li>
+<li>as省略用空格替代</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>条件查询：<ol>
+<li>where 子句后跟条件</li>
+<li>运算符：<ul>
+<li><code>&gt;、&lt;、&lt;=、&gt;、=、&lt;&gt;</code>     &lt;&gt;在 SQL 中表示不等于，在 mysql 中也可以使用!=, 没有==</li>
+<li>between…and , 在一个范围之内，如：between 100 and 200 相当于条件在 100 到 200 之间，包头又包尾( [100, 200] )</li>
+<li>IN(集合), 集合表示多个值，使用逗号分隔</li>
+<li>LIKE ‘’张%’；LIKE ‘’张_’ , 模糊查询   //‘%’ 表示多个任意字符 ，’ _‘表是单个任意字符</li>
+<li>IS NULL；is not null,  查询某一列为 NULL 的值，注：不能写=NULL</li>
+<li>and 或 &amp;&amp; ，与，SQL 中建议使用前者，后者并不通用。</li>
+<li>or 或 ||</li>
+<li>not 或 ! </li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE tes (</span><br><span class="line"> id INT, -- 编号</span><br><span class="line"> NAME VARCHAR(20), -- 姓名</span><br><span class="line"> age INT, -- 年龄</span><br><span class="line"> sex VARCHAR(5), -- 性别</span><br><span class="line"> address VARCHAR(100), -- 地址</span><br><span class="line"> math INT, -- 数学</span><br><span class="line"> english INT -- 英语</span><br><span class="line">);</span><br><span class="line">INSERT INTO tes (id,NAME,age,sex,address,math,english) VALUES </span><br><span class="line">	(1, &#x27;马云&#x27;, 55, &#x27;男&#x27;, &#x27;杭州&#x27;, 66, 78),</span><br><span class="line">	(2, &#x27;马化腾&#x27;, 45, &#x27;女&#x27;, &#x27;深圳&#x27;, 98, 87),</span><br><span class="line">	(3, &#x27;马景涛&#x27;, 55, &#x27;男&#x27;, &#x27;香港&#x27;, 56, 77),</span><br><span class="line">	(4, &#x27;柳岩&#x27;, 20, &#x27;女&#x27;, &#x27;湖南&#x27;, 76, 65),</span><br><span class="line">	(5, &#x27;柳青&#x27;, 20, &#x27;男&#x27;, &#x27;湖南&#x27;, 86, NULL),</span><br><span class="line">	(6, &#x27;刘德华&#x27;, 57, &#x27;男&#x27;, &#x27;香港&#x27;, 99, 99),</span><br><span class="line">	(7, &#x27;马德&#x27;, 22, &#x27;女&#x27;, &#x27;香港&#x27;, 99, 99),</span><br><span class="line">	(8, &#x27;德玛西亚&#x27;, 18, &#x27;男&#x27;, &#x27;南京&#x27;, 56, 65);</span><br><span class="line">DROP TABLE tes;	-- 删除表</span><br><span class="line">DESC tes; -- 查看表数据结构</span><br><span class="line">SELECT * FROM tes; -- 查看表中所有的数据</span><br><span class="line">ALTER TABLE tes CHANGE math 数学 INT; -- 修改旧列名math为数学</span><br><span class="line">ALTER TABLE tes CHANGE english 英语 INT; -- 修改旧列名english为英语</span><br><span class="line">ALTER TABLE tes ADD 总和 INT;</span><br><span class="line">UPDATE tes SET 总和 = 数学 + IFNULL(英语, 0); -- 更新新添加的总和列表</span><br><span class="line">ALTER TABLE tes CHANGE address 地址 VARCHAR(100);</span><br><span class="line">SELECT DISTINCT 地址 FROM tes; -- 查询不重复的地址信息</span><br><span class="line">SELECT * FROM tes WHERE age BETWEEN 20 AND 50; -- 筛选出年龄在[20, 50]区间的信息</span><br><span class="line">SELECT * FROM tes WHERE age IN (18, 20, 55);  -- 筛选出年龄在&#123;18, 20, 55&#125;集合的信息</span><br><span class="line">SELECT * FROM tes WHERE NAME LIKE &#x27;马%&#x27;; -- 筛选出姓马的人的信息</span><br><span class="line">SELECT * FROM tes WHERE NAME LIKE &#x27;马_&#x27;; -- 筛选出姓马，且名字只有两个字的人的信息</span><br><span class="line">UPDATE tes SET 英语 = 99 WHERE 英语 IS NULL;</span><br><span class="line">ALTER TABLE tes CHANGE NAME 姓名 VARCHAR(20);</span><br><span class="line">ALTER TABLE tes CHANGE age 年龄 INT;</span><br><span class="line">ALTER TABLE tes CHANGE sex 性别 VARCHAR(20); </span><br><span class="line">SELECT 姓名 AS NAME, 数学 AS math, 英语 AS english, (数学 + 英语) / 2 AS average FROM tes;</span><br><span class="line">ALTER TABLE tes ADD 平均分 DOUBLE(4, 2);</span><br><span class="line">UPDATE tes SET 平均分 = 总和 / 2;</span><br><span class="line">INSERT INTO tes VALUES (9, &#x27;西西&#x27;, 24, &#x27;男&#x27;, &#x27;成都&#x27;, 67, 90, NULL, NULL); -- 插入新的一项数据</span><br><span class="line">UPDATE tes SET 总和 = 数学 + 英语 WHERE id = 9;</span><br><span class="line">UPDATE tes SET 平均分 = 总和 / 2 WHERE id = 9;</span><br><span class="line">DELETE FROM tes WHERE id = 8;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>学号</th>
+<th>姓名</th>
+<th>年龄</th>
+<th>性别</th>
+<th>地址</th>
+<th>数学</th>
+<th>英语</th>
+<th>总和</th>
+<th>平均分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>马云</td>
+<td>55</td>
+<td>男</td>
+<td>杭州</td>
+<td>66</td>
+<td>78</td>
+<td>144</td>
+<td>72.00</td>
+</tr>
+<tr>
+<td>2</td>
+<td>马化腾</td>
+<td>45</td>
+<td>女</td>
+<td>深圳</td>
+<td>98</td>
+<td>87</td>
+<td>185</td>
+<td>92.50</td>
+</tr>
+<tr>
+<td>3</td>
+<td>马景涛</td>
+<td>55</td>
+<td>男</td>
+<td>香港</td>
+<td>56</td>
+<td>77</td>
+<td>133</td>
+<td>66.50</td>
+</tr>
+<tr>
+<td>4</td>
+<td>柳岩</td>
+<td>20</td>
+<td>女</td>
+<td>湖南</td>
+<td>76</td>
+<td>null</td>
+<td>141</td>
+<td>70.50</td>
+</tr>
+<tr>
+<td>5</td>
+<td>柳青</td>
+<td>20</td>
+<td>男</td>
+<td>湖南</td>
+<td>86</td>
+<td>99</td>
+<td>185</td>
+<td>92.50</td>
+</tr>
+<tr>
+<td>6</td>
+<td>刘德华</td>
+<td>57</td>
+<td>男</td>
+<td>香港</td>
+<td>99</td>
+<td>99</td>
+<td>198</td>
+<td>99.00</td>
+</tr>
+<tr>
+<td>7</td>
+<td>马德</td>
+<td>22</td>
+<td>女</td>
+<td>香港</td>
+<td>99</td>
+<td>99</td>
+<td>198</td>
+<td>99.00</td>
+</tr>
+<tr>
+<td>9</td>
+<td>西西</td>
+<td>24</td>
+<td>男</td>
+<td>成都</td>
+<td>67</td>
+<td>90</td>
+<td>157</td>
+<td>78.50</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li>排序查询：order by 排序字段1 排序方式1，排序字段2 排序方式2，…，排序字段n 排序方式n; <ol>
+<li>ASC：升序，默认的</li>
+<li>DESC：降序</li>
+<li>如果有多个排序条件，当前面的条件值一样时，才会判断后边的条件</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM tes ORDER BY 数学 DESC; -- 按照数学成绩降序排名</span><br><span class="line">-- 按照数学成绩排名，如果数学成绩一样，则按照英语成绩排名，都是升序</span><br><span class="line">SELECT * FROM tes ORDER BY 数学 ASC, 英语 ASC;</span><br><span class="line">ALTER TABLE tes CHANGE id 学号 INT;</span><br><span class="line">-- 按照平均分降序排列，如果平均分一样，则按照学号升序排列</span><br><span class="line">SELECT * FROM tes ORDER BY 平均分 DESC, 学号 ASC;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>聚合函数：将一列数据作为一个整体，进行纵向的计算，比如一个记录班级学生成绩的表，计算某一学科的班平均成绩<ol>
+<li>count：计算个数</li>
+<li>max：计算最大值</li>
+<li>min：计算最小值</li>
+<li>sum：计算和</li>
+<li>avg：计算平均值</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-- 聚合函数的计算会排除null值的数据</span><br><span class="line">SELECT COUNT(学号) FROM tes; -- 8</span><br><span class="line">UPDATE tes SET 英语 = NULL WHERE 学号 = 4;</span><br><span class="line">SELECT COUNT(英语) FROM tes; -- 7</span><br><span class="line">SELECT COUNT(IFNULL(英语, 0)) FROM tes; -- 8</span><br><span class="line">SELECT COUNT(*) FROM tes; -- 8 匹配任意没有null值的一列</span><br><span class="line">SELECT MAX(数学) AS 数学最高分 FROM tes;</span><br><span class="line">SELECT MIN(IFNULL(英语, 0)) AS 英语最低分 FROM tes;</span><br><span class="line">SELECT * FROM tes WHERE 数学 = 99;</span><br><span class="line">SELECT SUM(数学) AS 数学成绩总和 FROM tes;</span><br><span class="line">SELECT AVG(数学) AS 平均数学成绩 FROM tes;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>分组查询<ol>
+<li>语法：group by 分组字段;</li>
+<li>注意：<ul>
+<li>分组之后可查询的字段：分组字段，聚合函数</li>
+<li>where 和 having 的区别：where 再分组之前进行限定，如果不满足条件，则不参与分组。having 在分组之后进行限定，如果不满足，则不会被查询出来</li>
+<li>where 后不可跟聚合函数，having 可以进行聚合函数的判断</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 按照性别分组。分别查询男，女同学的平均分，人数</span><br><span class="line">SELECT 性别, AVG(数学), COUNT(学号) FROM tes GROUP BY 性别;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>性别</th>
+<th>AVG(数学)</th>
+<th>COUNT(学号)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>男</td>
+<td>74.8000</td>
+<td>5</td>
+</tr>
+<tr>
+<td>女</td>
+<td>91.0000</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 按照性别分组。分别查询男，女同学的平均分，人数，数学成绩大于70的才参与分组</span><br><span class="line">SELECT 性别, AVG(数学), COUNT(学号) FROM tes WHERE 数学 &gt; 70 GROUP BY 性别;</span><br><span class="line">-- 按照性别分组。分别查询男，女同学的平均分，人数，数学成绩大于70的才参与分组，然后只显示人数大于2的组别</span><br><span class="line">SELECT 性别, AVG(数学), COUNT(学号) FROM tes WHERE 数学 &gt; 70 GROUP BY 性别 HAVING COUNT(学号) &gt; 2;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>分页查询<ol>
+<li>语法：limit 开始的索引，每页查询的条数</li>
+<li>开始的索引 =  （当前页码数 - 1）* 每页显示的条数</li>
+<li>每个数据库的分页查询语句不同</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM tes LIMIT 0, 3; -- 第一页</span><br><span class="line">SELECT * FROM tes LIMIT 3, 3; -- 第二页</span><br><span class="line">SELECT * FROM tes LIMIT 6, 3; -- 第三页</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li><p>多表查询：</p>
+<ol>
+<li><p>笛卡尔积</p>
+<ul>
+<li>有两个集合A，B，选取两个集合的所有组成情况</li>
+<li>要完成多表查询，需要消除无用的数据</li>
+</ul>
+</li>
+<li><p>分类：</p>
+<ol>
+<li><p>内连接查询：</p>
+<ol>
+<li><p>隐式：</p>
+<ul>
+<li>~~~mysql<br>SELECT<pre><code>    t1.属性1, 
+    t1.属性2, 
+    t2.属性1
+</code></pre>
+FROM<pre><code>    table1 AS t1, 
+    table2 AS t2
+</code></pre>
+WHERE<pre><code>    t1.外键名 = t2.主键名,
+    条件n;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 显式：</span><br><span class="line"></span><br><span class="line">   1. 语法：select 字段列表 from 表名1 inner join 表名2 on 条件，inner可以省略</span><br><span class="line"></span><br><span class="line">      - ~~~mysql</span><br><span class="line">        SELECT</span><br><span class="line">        		t1.属性1, t1.属性2, t2.属性1</span><br><span class="line">        FROM</span><br><span class="line">        		table1 AS t1</span><br><span class="line">        INNER JOIN</span><br><span class="line">        		table2 AS t2	</span><br><span class="line">        ON</span><br><span class="line">        		t1.外键名 = t2.主键名;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>注意事项：</p>
+<ol>
+<li>从那些表中查询数据</li>
+<li>条件是什么</li>
+<li>查询哪些字段</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>外连接查询</p>
+<ol>
+<li>左外连接    <ul>
+<li>语法：select 字段列表 from 表1 left [outer] join 表2 on 条件</li>
+<li>查询左表的所有数据以及两表的交集部分</li>
+</ul>
+</li>
+<li>右外连接<ul>
+<li>语法：select 字段列表 from 表1 right [outer] join 表2 on 条件</li>
+<li>查询右表的所有数据以及两表的交集部分</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>子查询</p>
+<ol>
+<li><p>概念：查询中嵌套查询，称嵌套查询为子查询</p>
+</li>
+<li><p>~~~mysql<br>select * from t1 where age = (select MAX(age) from t1);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">         3. 子查询的不同情况</span><br><span class="line"></span><br><span class="line">            1. 单行单列：子查询作为条件使用 &gt;、&lt;、&lt;=、&gt;、=、&lt;&gt; 去判断</span><br><span class="line">            2. 多行单列：子查询作为条件使用 in 去判断</span><br><span class="line">            3. 多行多列：子查询可以作为一张虚拟表参与查询</span><br><span class="line"></span><br><span class="line">#### 七. 约束</span><br><span class="line"></span><br><span class="line">1. 概念：对表中的数据进行限定，保证数据的正确性，有效性和完整性。</span><br><span class="line">2. 约束的分类：</span><br><span class="line">   1. 主键约束：primary key，主键就是表中记录的唯一标识</span><br><span class="line">      1. 含义：非空且唯一</span><br><span class="line">      2. 一张表只能有一个字段为主键</span><br><span class="line">      3. 删除主键：ALTER TABLE stu DROP PRIMARY KEY;</span><br><span class="line">      4. 添加主键：ALTER TABLE stu MODIFY id INT PRIMARY KEY;</span><br><span class="line">      5. 自动增长：</span><br><span class="line">         - 概念：如果某一类是数值类型的，使用auto_increment可以来完成值的自动增长</span><br><span class="line">         - 删除自动增长：ALTER TABLE stu MODIFY id INT ;</span><br><span class="line"></span><br><span class="line">~~~mysql</span><br><span class="line">CREATE TABLE stu (</span><br><span class="line">	id INT PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">	NAME VARCHAR(20) NOT NULL -- 创建表的时候添加约束 name 不能为空</span><br><span class="line">);</span><br><span class="line">ALTER TABLE stu DROP PRIMARY KEY; -- 删除主键</span><br><span class="line">ALTER TABLE stu MODIFY id INT PRIMARY KEY; -- 添加主键</span><br><span class="line">ALTER TABLE stu MODIFY id INT; -- 删除自动增长</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>非空约束：not null</p>
+<ol>
+<li>创建表的时候添加约束</li>
+<li>删除某一列的非空约束，alter table 表名 modify 列名 数据类型   </li>
+<li>添加非空约束：alter table 表名 modify 列名 数据类型 not null</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE stu (</span><br><span class="line">	id INT,</span><br><span class="line">	NAME VARCHAR(20) NOT NULL -- 创建表的时候添加约束 name 不能为空</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">INSERT INTO stu VALUES</span><br><span class="line">	(1, &#x27;小明&#x27;),</span><br><span class="line">	(2, &#x27;小花&#x27;),</span><br><span class="line">	(3, &#x27;小风&#x27;),</span><br><span class="line">	(4, NULL);    -- 报错 Column &#x27;name&#x27; cannot be null，inset into语句执行失败</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>唯一约束：unique<ol>
+<li>可以为null，但是只能有一个null值</li>
+<li>给已存在的表添加唯一约束：<ul>
+<li>新增一列：ALTER TABLE stu ADD phone VARCHAR(20) UNIQUE;</li>
+<li>给已存在的列增加约束：ALTER TABLE stu MODIFY id INT UNIQUE;</li>
+<li>已存在的列项有重复数据无法添加唯一约束，需要删除其中一条重复项</li>
+</ul>
+</li>
+<li>删除唯一约束：ALTER TABLE stu DROP INDEX 已经添加唯一约束的列名;</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE stu ADD phone VARCHAR(20) UNIQUE;</span><br><span class="line">UPDATE stu SET phone = &#x27;13812345678&#x27; WHERE id = 1;</span><br><span class="line"> </span><br><span class="line">-- 报错 Duplicate entry &#x27;13812345678&#x27; for key &#x27;stu.phone&#x27;</span><br><span class="line">UPDATE stu SET phone = &#x27;13812345678&#x27; WHERE id = 2; </span><br><span class="line"></span><br><span class="line">ALTER TABLE stu DROP INDEX phone; -- 删除唯一约束</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>外键约束：foreign key，让表与表产生关系，从而保证数据的正确性，外键可以为null<ol>
+<li>在创建表时添加外键约束：constraint 自定义外键名 foreign key (外键列名称) references 主表名称(主表列名称)</li>
+<li>删除：alter table 定义了外键的表名 drop foreign key 自定义外键名</li>
+<li>添加：alter table 表名 add constraint 自定义外键名 foreign key (外键列名称) references 主表名称(主表列名称)</li>
+<li>级联：<ol>
+<li>级联更新，在创建或修改语句后添加 on update cascade</li>
+<li>级联删除，on delete cascade</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="八-数据库的设计"><a href="#八-数据库的设计" class="headerlink" title="八. 数据库的设计"></a>八. 数据库的设计</h4><ol>
+<li>多表之间的关系<ol>
+<li>一对一，人和身份证</li>
+<li>一对多(多对一)，部门和员工</li>
+<li>多队多，学生和课程</li>
+</ol>
+</li>
+<li>实现关系 <ol>
+<li>一对多(多对一)：在多的一方建立外键，指向一的一方的主键</li>
+<li>多对多：实现需要借助第三章中间表，中间表至少包涵两个字段，这两个字段作为第三张表的外键，分别指向两张表的主键</li>
+<li>一对一：可以在任意一方添加唯一外键指向另一方主键</li>
+<li><img src = "/images/1.PNG"></li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">-- 创建旅游线路分类表 tab_category</span><br><span class="line">-- cid 旅游线路分类主键，自动增长</span><br><span class="line">-- cname 旅游线路分类名称非空，唯一，字符串 100</span><br><span class="line">create table tab_category (</span><br><span class="line"> cid int primary key auto_increment,</span><br><span class="line"> cname varchar(100) not null unique</span><br><span class="line">)</span><br><span class="line">-- 添加旅游线路分类数据：</span><br><span class="line">insert into tab_category (cname) values (&#x27;周边游&#x27;), (&#x27;出境游&#x27;), (&#x27;国内游&#x27;), (&#x27;港澳游&#x27;);</span><br><span class="line">select * from tab_category;</span><br><span class="line">-- 创建旅游线路表 tab_route</span><br><span class="line">/*</span><br><span class="line">rid 旅游线路主键，自动增长</span><br><span class="line">rname 旅游线路名称非空，唯一，字符串 100</span><br><span class="line">price 价格</span><br><span class="line">rdate 上架时间，日期类型</span><br><span class="line">cid 外键，所属分类</span><br><span class="line">*/</span><br><span class="line">create table tab_route(</span><br><span class="line"> rid int primary key auto_increment,</span><br><span class="line"> rname varchar(100) not null unique,</span><br><span class="line"> price double,</span><br><span class="line"> rdate date,</span><br><span class="line"> cid int,</span><br><span class="line"> foreign key (cid) references tab_category(cid) -- 省略自动命名</span><br><span class="line">)</span><br><span class="line">-- 添加旅游线路数据</span><br><span class="line">INSERT INTO tab_route VALUES</span><br><span class="line">(NULL, &#x27;【厦门+鼓浪屿+南普陀寺+曾厝垵 高铁 3 天 惠贵团】尝味友鸭面线 住 1 晚鼓浪屿&#x27;, 1499,</span><br><span class="line">&#x27;2018-01-27&#x27;, 1),</span><br><span class="line">(NULL, &#x27;【浪漫桂林 阳朔西街高铁 3 天纯玩 高级团】城徽象鼻山 兴坪漓江 西山公园&#x27;, 699, &#x27;2018-02-</span><br><span class="line">22&#x27;, 3),</span><br><span class="line">(NULL, &#x27;【爆款￥1699 秒杀】泰国 曼谷 芭堤雅 金沙岛 杜拉拉水上市场 双飞六天【含送签费 泰风情 广州</span><br><span class="line">往返 特价团】&#x27;, 1699, &#x27;2018-01-27&#x27;, 2),</span><br><span class="line">(NULL, &#x27;【经典•狮航 ￥2399 秒杀】巴厘岛双飞五天 抵玩【广州往返 特价团】&#x27;, 2399, &#x27;2017-12-23&#x27;,</span><br><span class="line">2),</span><br><span class="line">(NULL, &#x27;香港迪士尼乐园自由行 2 天【永东跨境巴士广东至迪士尼去程交通+迪士尼一日门票+香港如心海景酒店</span><br><span class="line">暨会议中心标准房 1 晚住宿】&#x27;, 799, &#x27;2018-04-10&#x27;, 4);</span><br><span class="line">select * from tab_route;</span><br><span class="line">创建用户表 tab_user</span><br><span class="line">uid 用户主键，自增长</span><br><span class="line">username 用户名长度 100，唯一，非空</span><br><span class="line">password 密码长度 30，非空</span><br><span class="line">name 真实姓名长度 100</span><br><span class="line">birthday 生日</span><br><span class="line">sex 性别，定长字符串 1</span><br><span class="line">telephone 手机号，字符串 11</span><br><span class="line">email 邮箱，字符串长度 100</span><br><span class="line">*/</span><br><span class="line">create table tab_user (</span><br><span class="line"> uid int primary key auto_increment,</span><br><span class="line"> username varchar(100) unique not null,</span><br><span class="line"> password varchar(30) not null,</span><br><span class="line"> name varchar(100),</span><br><span class="line"> birthday date,</span><br><span class="line"> sex char(1) default &#x27;男&#x27;,</span><br><span class="line"> telephone varchar(11),</span><br><span class="line"> email varchar(100)</span><br><span class="line">)</span><br><span class="line">-- 添加用户数据</span><br><span class="line">INSERT INTO tab_user VALUES</span><br><span class="line">(NULL, &#x27;cz110&#x27;, 123456, &#x27;老王&#x27;, &#x27;1977-07-07&#x27;, &#x27;男&#x27;, &#x27;13888888888&#x27;, &#x27;66666@qq.com&#x27;),</span><br><span class="line">(NULL, &#x27;cz119&#x27;, 654321, &#x27;小王&#x27;, &#x27;1999-09-09&#x27;, &#x27;男&#x27;, &#x27;13999999999&#x27;, &#x27;99999@qq.com&#x27;);</span><br><span class="line">select * from tab_user;</span><br><span class="line">/*</span><br><span class="line">创建收藏表 tab_favorite</span><br><span class="line">rid 旅游线路 id，外键</span><br><span class="line">date 收藏时间</span><br><span class="line">uid 用户 id，外键</span><br><span class="line">rid 和 uid 不能重复，设置复合主键，同一个用户不能收藏同一个线路两次</span><br><span class="line">*/</span><br><span class="line">create table tab_favorite (</span><br><span class="line"> rid int,</span><br><span class="line"> date datetime,</span><br><span class="line"> uid int,o</span><br><span class="line"> -- 创建复合主键</span><br><span class="line"> primary key(rid,uid), -- 联合主键</span><br><span class="line"> foreign key (rid) references tab_route(rid),</span><br><span class="line"> foreign key(uid) references tab_user(uid)</span><br><span class="line">)</span><br><span class="line">-- 增加收藏表数据</span><br><span class="line">INSERT INTO tab_favorite VALUES</span><br><span class="line">(1, &#x27;2018-01-01&#x27;, 1), -- 老王选择厦门</span><br><span class="line">(2, &#x27;2018-02-11&#x27;, 1), -- 老王选择桂林</span><br><span class="line">(3, &#x27;2018-03-21&#x27;, 1), -- 老王选择泰国</span><br><span class="line">(2, &#x27;2018-04-21&#x27;, 2), -- 小王选择桂林</span><br><span class="line">(3, &#x27;2018-05-08&#x27;, 2), -- 小王选择泰国</span><br><span class="line">(5, &#x27;2018-06-02&#x27;, 2); -- 小王选择迪士尼</span><br><span class="line">select * from tab_favorite;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>数据设计范式 </p>
+<ol>
+<li><p>概念：设计数据库时需要遵循的规范，设计关系数据库时，遵从不同的规范要求，设计出合理的关系型数据库，这些不同的规范要求被称为不同的范式，<strong>各种范式呈递次规范</strong>，越高的范式数据库冗余越小。</p>
+<p>目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、巴斯-科德范式（BCNF）、第四范式(4NF）和第五范式（5NF，又称完美范式）。</p>
+<img src = "/images/2.PNG" alt = "初始表"></li>
+<li><p>分类：</p>
+<ol>
+<li>第一范式（1NF）：数据库表的每一列都是不可分割的原子数据项，而不能是集合，数组，记录等非原子数据项<ol>
+<li><img src = "/images/3.PNG" alt = "不可分割列-表"></li>
+</ol>
+</li>
+<li>第二范式（2NF）：在1NF的基础上，非码属性必须完全依赖于码（在1NF基础上消除非主属性对主码的部分函数依赖）<ol>
+<li>概念：    <ul>
+<li>函数依赖：A –&gt; B，如果通过A属性（属性组）的值，可以确定唯一B属性的值，则称B依赖于A，学号–&gt;姓名，（学号，课程）–&gt;分数</li>
+<li>完全函数依赖：A –&gt; B，如果A是一个属性组，B属性值的确定需要依赖A属性组中的所有属性值，则B完全依赖于A</li>
+<li>部分函数依赖：A –&gt; B，如果A是一个属性组，B属性值的确定只需要依赖A属性组中的某一些属性值，则B部分依赖于A</li>
+<li>传递函数依赖：A–&gt;B, B–&gt;C，如果通过A属性（属性组）的值，可以确定唯一B属性的值，再通过B属性（属性组）的值,确定唯一属性C，则称C传递依赖于A。</li>
+<li>码：如果在一张表中，一个属性或属性组，被其他所有属性完全依赖，则称这个属性（属性组）为该表的码<ul>
+<li>主属性：码属性组中的所有属性</li>
+<li>非主属性：其他除码属性组的属性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><img src = "/images/4.PNG" alt = "消除依赖-表"></li>
+</ol>
+</li>
+<li>第三范式（3NF）：在2NF基础上，任何非主属性不依赖于其它非主属性（在2NF基础上消除传递依赖）<ol>
+<li><img src = "/images/5.PNG" alt = "消除传递依赖-表"></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="九-数据库的备份和还原"><a href="#九-数据库的备份和还原" class="headerlink" title="九. 数据库的备份和还原"></a>九. 数据库的备份和还原</h4><ol>
+<li>命令行：<ol>
+<li>备份：mysqldump -u用户名 -p密码 数据库名称 &gt; 保存的路径(cmd指令 )</li>
+<li>还原：登录数据库 -&gt; 创建数据库 -&gt; 使用数据库 -&gt; 执行文件 sorce 文件路径 （cmd 指令）</li>
+</ol>
+</li>
+</ol>
+<h4 id="十-事务"><a href="#十-事务" class="headerlink" title="十. 事务"></a>十. 事务</h4><ol>
+<li>事务的基本介绍<ol>
+<li>概念：如果一个包涵多个步骤的业务操作，被事务管理，那么这些操作要么同时成功，要么同时失败</li>
+<li>操作：<ol>
+<li>开启事务：start transaction</li>
+<li>回滚：rollback</li>
+<li>提交：commit</li>
+</ol>
+</li>
+<li>mysql数据库中事务默认自动提交（oracle数据库默认手动提交）<ol>
+<li>事务提交的两种方式：    <ol>
+<li>自动提交：mysql中的一条DML语句自动提交一次事务</li>
+<li>手动提交：需要先开启事务，再提交</li>
+</ol>
+</li>
+<li>修改事务的默认提交方式<ol>
+<li>查看事务的默认提交方式：select @@autocommit；– 1代表自动提交 0代表手动提交</li>
+<li>修改默认提交方式：select @@autocommit = 0；</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>事务的四大特征<ol>
+<li>原子性：事务是不可分隔的最小单位，要么同时成功，要么同时失败</li>
+<li>持久性：事务一旦提交或者回滚，数据库会持久化的保存数据</li>
+<li>隔离性：多个事务之间相互独立</li>
+<li>一致性：事务操作前后数据总量不变</li>
+</ol>
+</li>
+<li>事务的隔离级别<ol>
+<li>概念：多个事务之间隔离，相互独立，但是如果多个事务操作同一批数据，则会引发一些问题，设置不同的隔离级别就可以解决这些问题。</li>
+<li>存在问题：<ol>
+<li>脏读：一个事务读取到另外一个事务没有提交的数据</li>
+<li>不可重复读（虚读）：在同一个事务中，两次读取到的数据不一样</li>
+<li>幻读：一个事务（DML）操作数据表中所有的记录，另一个事务添加了一条数据，则第一个事务查询不到自己的修改</li>
+</ol>
+</li>
+<li>隔离级别，按顺序安全性越来越高，但是效率越来越低<ol>
+<li>read uncommitted：读未提交   // 脏读，虚读，幻读问题都会产生</li>
+<li>read committed（oracle默认级别）：读已提交   //虚读， 幻读问题产生</li>
+<li>repeatable read（默认级别）：可重复读   //幻读问题产生</li>
+<li>serializable：串行化，一个事务操作表时，另外一个事务无法操作该表  //不会产生问题</li>
+</ol>
+</li>
+<li>查询隔离级别：select @@tx_isolation；</li>
+<li>设置隔离级别：set global transaction isolation level  级别字符串</li>
+</ol>
+</li>
+</ol>
+<h4 id="十一-DCL（管理用户，授权）"><a href="#十一-DCL（管理用户，授权）" class="headerlink" title="十一. DCL（管理用户，授权）"></a>十一. DCL（管理用户，授权）</h4><ol>
+<li>管理用户<ol>
+<li>添加用户：create user ‘用户名’@‘主机名’ identified by ‘密码’，主机名用通配符%替代，表示任意主机可访问</li>
+<li>删除用户：drop user ‘用户名’@‘主机名’</li>
+<li>修改用户密码 ：set password for ‘用户名’@‘主机名’ = password(‘新密码’) ；update语句也可以修改<ul>
+<li>忘记root用户密码<ol>
+<li>cmd —&gt; net stop MySQL80</li>
+<li>mysqld –skip–grant–tables</li>
+<li>开启另一个cmd，输入mysql回车可以直接登录</li>
+<li>use mysql; update user set password = password(‘你的新密码’) where user = ‘root ‘ 修改root用户密码，关闭所有cmd窗口</li>
+<li>任务管理器结束mysqld进程</li>
+<li>cmd —&gt; net star MySQL80</li>
+<li>使用新密码登录就可以使用</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>查询用户：在mysql数据库中user表中存放用户数据</li>
+</ol>
+</li>
+<li>权限管理<ol>
+<li>查询权限：show grants for ‘用户名’@‘主机名’</li>
+<li>授予权限：grant 权限列表 on 数据库名.表名 to ‘用户名’@‘主机名’<ul>
+<li>授予用户所有数据库的所有表的所有权限：<code>grant all on *.* to ‘用户名’@‘主机名’</code></li>
+</ul>
+</li>
+<li>撤销权限：revoke 权限列表 on 数据库名.表名 from ‘用户名’@‘主机名’</li>
+</ol>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">RaverHeart</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2021/06/12/MySql/">http://example.com/2021/06/12/MySql/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/06/19/JDBC/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">JDBC</div></div></a></div><div class="next-post pull-right"><a href="/2021/06/10/Java-%E6%B3%A8%E8%A7%A3/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Java - 注解</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/1617328720326__01.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">RaverHeart</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaWeb%E5%BC%80%E5%8F%91"><span class="toc-number">1.</span> <span class="toc-text">JavaWeb开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">一. 数据库的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C-MySql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">二. MySql数据库软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89-SQL"><span class="toc-number">1.3.</span> <span class="toc-text">三. SQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B-DDL%EF%BC%88Data-Definition-Language%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">四. DDL（Data Definition Language）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94-DML%EF%BC%9A%E5%A2%9E%E5%88%A0%E6%94%B9%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.5.</span> <span class="toc-text">五. DML：增删改表中的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD-DQL%EF%BC%9A%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.6.</span> <span class="toc-text">六. DQL：查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AB-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.7.</span> <span class="toc-text">八. 数据库的设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%9D-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%A4%87%E4%BB%BD%E5%92%8C%E8%BF%98%E5%8E%9F"><span class="toc-number">1.8.</span> <span class="toc-text">九. 数据库的备份和还原</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81-%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.9.</span> <span class="toc-text">十. 事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%81%E4%B8%80-DCL%EF%BC%88%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%EF%BC%8C%E6%8E%88%E6%9D%83%EF%BC%89"><span class="toc-number">1.10.</span> <span class="toc-text">十一. DCL（管理用户，授权）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/03/28/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/03/28/hello-world/" title="Hello World">Hello World</a><time datetime="2022-03-28T14:19:08.423Z" title="Created 2022-03-28 22:19:08">2022-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/09/Spring-Data-Jpa/" title="Spring Data Jpa"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Spring Data Jpa"/></a><div class="content"><a class="title" href="/2022/03/09/Spring-Data-Jpa/" title="Spring Data Jpa">Spring Data Jpa</a><time datetime="2022-03-09T15:01:58.000Z" title="Created 2022-03-09 23:01:58">2022-03-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/28/Oracle/" title="Oracle"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Oracle"/></a><div class="content"><a class="title" href="/2022/02/28/Oracle/" title="Oracle">Oracle</a><time datetime="2022-02-28T13:22:17.000Z" title="Created 2022-02-28 21:22:17">2022-02-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/26/Git/" title="Git"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git"/></a><div class="content"><a class="title" href="/2022/02/26/Git/" title="Git">Git</a><time datetime="2022-02-26T13:09:23.000Z" title="Created 2022-02-26 21:09:23">2022-02-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/01/15/ProJect/" title="ProJect"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ProJect"/></a><div class="content"><a class="title" href="/2022/01/15/ProJect/" title="ProJect">ProJect</a><time datetime="2022-01-15T04:12:47.000Z" title="Created 2022-01-15 12:12:47">2022-01-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By RaverHeart</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="icp"></div><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/"><span>备案号：蜀ICP备2021015639号-1</span></a></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
